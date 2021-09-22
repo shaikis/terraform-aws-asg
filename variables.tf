@@ -29,3 +29,14 @@ variable "app_lb_target_group_arn" {}
 variable "asg_launch_template_name" {}
 variable "asg_launch_template_image_id" {}
 variable "asg_launch_template_instance_type" {}
+variable "db_config" {
+   type = object(
+     {
+       user     = string
+       password = string
+       database = string
+       hostname = string
+       port     = string
+     }
+   )
+ }
