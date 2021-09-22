@@ -40,3 +40,8 @@ variable "db_config" {
      }
    )
  }
+
+variable "use_default_template" {
+    default = false
+    type    = bool
+}
