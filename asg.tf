@@ -1,20 +1,12 @@
- data "template_cloudinit_config" "config" {
-   gzip          = true
-   base64_encode = true
-   part {
-     content_type = "text/cloud-config"
-     content      = templatefile("${path.module}/cloud_config.yaml", var.db_config)
-   }
- }
-  
+
 # ASG Launch template
 resource "aws_launch_template" "asg_launch_template" {
-  count         = length(var.use_default_template) ? 1 : 0
-  name_prefix   = var.asg_launch_template_name
-  image_id      = var.asg_launch_template_image_id
-  instance_type = var.asg_launch_template_instance_type
+  name_prefix            = var.asg_launch_template_name
+  image_id               = var.asg_launch_template_image_id
+  instance_type          = var.asg_launch_template_instance_type
   vpc_security_group_ids = [aws_security_group.asg_instance_sg.id]
-  user_data     = data.template_cloudinit_config.config.rendered
+  user_data              = var.user_data
+  key_name               = var.ssh_keypair
 }
 
 
