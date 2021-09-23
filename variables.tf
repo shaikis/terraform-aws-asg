@@ -48,7 +48,9 @@ variable "use_default_template" {
 
 variable "user_data" {
     type = map(string)
+    default = ""
 }
 variable "ssh_keypair" {
     type= string
+    default = ""
 }
