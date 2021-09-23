@@ -45,3 +45,10 @@ variable "use_default_template" {
     default = false
     type    = bool
 }
+
+variable "user_data" {
+    type = map(string)
+}
+variable "ssh_keypair" {
+    type= string
+}
