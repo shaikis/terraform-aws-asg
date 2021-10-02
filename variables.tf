@@ -42,3 +42,11 @@ variable "ssh_keypair" {
     type= string
     default = ""
 }
+variable "ingress_string" {
+    type = list(map(string))
+    default=[]
+}
+variable "egress_string" {
+    type = list(map(string))
+    default=[]
+}
