@@ -6,13 +6,6 @@ module "asg" {
     vpcid                                   = "vpc-id1"
     alb_app_http_sg_id                      = "sg-id1"
     asg_instance_name                       = "myAsg"
-    asg_instance_sg_ingress_from_port       = 80
-    asg_instance_sg_ingress_to_port         = 80
-    asg_instance_sg_ingress_to_protocol     = "TCP"
-    asg_instance_sg_egress_from_port        = 0
-    asg_instance_sg_egress_to_port          = 0
-    asg_instance_sg_egress_protocol         = -1
-    asg_instance_sg_egress_cidr_blocks      = ["0.0.0.0/0"]
     subnetids                               = [sub-id1, sub-id2]
     asg_desired_capacity                    = 1
     asg_cpacity_max_size                    = 1
@@ -21,6 +14,25 @@ module "asg" {
     asg_launch_template_name                = "MyAsgLaunchTemplate"
     asg_launch_template_image_id            = "img-abc123"
     asg_launch_template_instance_type       = "t2.micro"
+    ingress_string = [
+        {
+      description      = "TLS from VPC"
+      from_port        = 443
+      to_port          = 443
+      protocol         = "tcp"
+      cidr_blocks      = [aws_vpc.main.cidr_block]
+      ipv6_cidr_blocks = [aws_vpc.main.ipv6_cidr_block]
+    }
+    ]
+    egress_string = [
+    {
+      from_port        = 0
+      to_port          = 0
+      protocol         = "-1"
+      cidr_blocks      = ["0.0.0.0/0"]
+      ipv6_cidr_blocks = ["::/0"]
+    }
+    ]
 
 }
 ```
