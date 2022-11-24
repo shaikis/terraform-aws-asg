@@ -14,6 +14,7 @@ module "asg" {
     asg_launch_template_name                = "MyAsgLaunchTemplate"
     asg_launch_template_image_id            = "img-abc123"
     asg_launch_template_instance_type       = "t2.micro"
+    # Security group related parameters.
     ingress_string = [
         {
       description      = "TLS from VPC"
