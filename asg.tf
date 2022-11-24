@@ -5,7 +5,7 @@ resource "aws_launch_template" "asg_launch_template" {
   image_id               = var.asg_launch_template_image_id
   instance_type          = var.asg_launch_template_instance_type
   vpc_security_group_ids = [aws_security_group.asg_instance_sg.id]
-  user_data              = var.user_data
+  user_data              = file("user_data.sh")
   key_name               = var.ssh_keypair
 }
 
