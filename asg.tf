@@ -22,5 +22,9 @@ resource "aws_autoscaling_group" "main_asg" {
     id      = aws_launch_template.asg_launch_template.id
     version = "$Latest"
   }
+  
+  lifecycle { 
+    ignore_changes = [desired_capacity, target_group_arns]
+  }
 }
 
